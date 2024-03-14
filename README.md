@@ -40,6 +40,7 @@
                                           <li> <a href="#AlgoritmoJ"> Algoritmo. </a> </li>
                                           <li> <a href="#ImplementaciónJ"> Implementación. </a> </li>  
                                       </ul>
+                              <li> <a href="#Evidencia de trabajo en equipo"> Evidencia de trabajo en equipo. </a> </li>   
                             </ul>
                     </ul>
                 </nav>
@@ -552,3 +553,157 @@ Dado que se cumple la condición, el resultado es:
 
 
 Te invito a que puedas checar mis ejercicios para profundizar en la implementación: <a href="https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Seidel"> <font font face = "arial"> https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Seidel </font> </a>
+
+
+
+
+
+
+
+
+
+<h3 align = "center"> <font font face = "forte"> <a name="Método de Jacobi"> 4. Método de Jacobi </a> </h3>
+
+<h4> <font font face = "arial"> <a name="DescripciónJ"> Descripción: </a> </h4>
+
+   - Similar al método de Gauss-Seidel, es otra técnica iterativa para resolver sistemas de ecuaciones lineales.
+   - Divide la matriz de coeficientes en una parte diagonal y una parte no diagonal.
+   - En cada iteración, se actualizan las incógnitas utilizando los valores iniciales.
+   - Adecuado para sistemas con **matrices diagonales dominantes**.
+   - Puede ser menos eficiente que Gauss-Seidel en términos de convergencia.
+
+
+<h4> <font font face = "arial"> <a name="AlgoritmoJ"> Algoritmo: </a> </h4>
+
+Este método es una versión acelerada de Jácobi. En el cual es necesario contar con un vector aproximado completo para proceder a la sustitución en las ecuaciones de recurrencia y obtener una nueva aproximación. En el método de Gauss-Seidel se propone ir sustituyendo los nuevos valores de la aproximación siguiente conforme se vayan obteniendo sin esperar a tener un vector completo. De esta forma se acelera la convergencia.
+
+Para resolverlo podemos seguir los siguientes pasos:
+
+  1. **Inicialización:** Se elige un vector inicial ( x^{(0)} ) para las soluciones.
+  2. **Iteración:** En el paso ( k ), cada componente ( x_i^{(k+1)} ) del nuevo vector solución se calcula usando la fórmula:
+
+     ![Captura de pantalla 2024-03-14 112233](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/fb829ecf-31bb-4f61-9622-56195d0fdb09)
+
+    donde ( a_{ii} ) es el coeficiente de la diagonal de la matriz de coeficientes, ( b_i ) es el término independiente de la ecuación, y la suma se realiza sobre todos los ( j ) excepto ( i ).
+  3. **Convergencia:** Se repite el proceso hasta que la diferencia entre las soluciones en iteraciones sucesivas sea menor que un umbral preestablecido.
+
+
+<h6> <font font face = "arial"> Ejemplo </h6>
+
+![Captura de pantalla 2024-03-14 112543](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/54dab2fb-0083-4a84-9781-753403130116)
+
+
+
+<h4> <font font face = "arial"> <a name="ImplementaciónJ"> Implementación: </a> </h4>
+
+<h5> <font font face = "arial"> Ejemplo a resolver. </h5>
+
+![Captura de pantalla 2024-03-14 113047](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/503de3e6-85cf-457b-9a5e-30e25f60ccf1)
+
+
+
+<h5> <font font face = "arial"> <b> <i> Ejemplo en código. </i> </b> </h5>
+
+    package jacobi4;
+    
+    public class Jacobi4 {
+    
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String[] args) {
+            double[][] coeficientes = {
+                {6,2,-1,4},
+                {1,5,1,3},
+                {2,1,4,27}
+            };
+            
+            double[] valoresIniciales = {0, 0, 0}; // Valores iniciales de las incógnitas
+            double tolerancia = 0.0001; // Tolerancia para el criterio de convergencia
+            int iteracionesMaximas = 1000; // Número máximo de iteraciones
+            
+            double[] solucion = jacobi(coeficientes, valoresIniciales, tolerancia, iteracionesMaximas);
+            
+            if (solucion != null) {
+                System.out.println("Solución del sistema de ecuaciones:");
+                System.out.println("x = " + solucion[0]);
+                System.out.println("y = " + solucion[1]);
+                System.out.println("z = " + solucion[2]);
+            } else {
+                System.out.println("El método no converge.");
+            }
+        }
+        
+        public static double[] jacobi(double[][] coeficientes, double[] valoresIniciales, double tolerancia, int iteracionesMaximas) {
+            int n = valoresIniciales.length;
+            double[] solucion = new double[n];
+            double[] solucionAnterior = new double[n];
+            int iteraciones = 0;
+            double error = tolerancia + 1;
+            
+            // Inicializar la solución con los valores iniciales
+            System.arraycopy(valoresIniciales, 0, solucion, 0, n);
+            
+            // Iterar hasta que se alcance la tolerancia o el número máximo de iteraciones
+            while (error > tolerancia && iteraciones < iteracionesMaximas) {
+                // Copiar la solución anterior
+                System.arraycopy(solucion, 0, solucionAnterior, 0, n);
+                
+                // Calcular la nueva solución
+                for (int i = 0; i < n; i++) {
+                    double suma = 0;
+                    for (int j = 0; j < n; j++) {
+                        if (j != i) {
+                            suma += coeficientes[i][j] * solucionAnterior[j];
+                        }
+                    }
+                    solucion[i] = (coeficientes[i][n] - suma) / coeficientes[i][i];
+                }
+                
+                // Calcular el error
+                error = 0;
+                for (int i = 0; i < n; i++) {
+                    error += Math.abs(solucion[i] - solucionAnterior[i]);
+                }
+                
+                iteraciones++;
+            }
+            
+            // Verificar la convergencia
+            if (error <= tolerancia) {
+                return solucion;
+            } else {
+                return null; // No converge
+            }
+        }
+        
+    }
+
+
+<h5> <font font face = "arial"> <b> <i> Ejecución del programa. </i> </b> </h5>
+
+![Captura de pantalla 2024-03-14 113337](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/a6842b59-ba5e-4f50-be8a-4f888f32b80d)
+
+
+Te invito a que puedas checar mis ejercicios para profundizar en la implementación: <a href="https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Jacobi"> <font font face = "arial"> https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Jacobi </font> </a>
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+<h2 align = "center"> <font  font face = "bauhaus 93">  <a name="Evidencia de trabajo en equipo"> Evidencia de trabajo en equipo </a> </font> </h2>
+
+![Imagen de WhatsApp 2024-03-14 a las 02 01 26_e742f824](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/4ea5b755-6f05-4444-9804-d257430daa8d)
+
+
+El problemario fue trabajado de forma colaborativa por:
+- Rubi veloz Jimenez
+-Alan Orgaz Villegas
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Despedida:
+
+Me despido con un cordial saludo. Si tienen alguna duda o sugerencia, contactar por redes sociales: facebook, instagram, etc.
