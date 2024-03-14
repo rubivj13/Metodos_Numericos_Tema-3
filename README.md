@@ -23,8 +23,23 @@
                                         <li> <a href="#ImplementaciónEG"> Implementación. </a> </li>  
                                     </ul>
                                 <li> <a href="#Método de Gauss-Jordan"> Método de Gauss-Jordan. </a> </li>
+                                      <ul class="subindice"> 
+                                          <li> <a href="#DescripciónGJ"> Descripción. </a> </li>
+                                          <li> <a href="#AlgoritmoGJ"> Algoritmo. </a> </li>
+                                          <li> <a href="#ImplementaciónGJ"> Implementación. </a> </li>  
+                                      </ul>
                                 <li> <a href="#Método de Gauss-Seidel"> Método de Gauss-Seidel. </a> </li> 
+                                      <ul class="subindice"> 
+                                          <li> <a href="#DescripciónGS"> Descripción. </a> </li>
+                                          <li> <a href="#AlgoritmoGS"> Algoritmo. </a> </li>
+                                          <li> <a href="#ImplementaciónGS"> Implementación. </a> </li>  
+                                      </ul>
                                 <li> <a href="#Método de Jacobi"> Método de Jacobi. </a> </li> 
+                                      <ul class="subindice"> 
+                                          <li> <a href="#DescripciónJ"> Descripción. </a> </li>
+                                          <li> <a href="#AlgoritmoJ"> Algoritmo. </a> </li>
+                                          <li> <a href="#ImplementaciónJ"> Implementación. </a> </li>  
+                                      </ul>
                             </ul>
                     </ul>
                 </nav>
@@ -181,3 +196,169 @@ z=1**
 
 
 Te invito a que puedas checar mis ejercicios para profundizar en la implementación: <a href="https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/Eliminaci%C3%B3n%20Gaussiana"> <font font face = "arial"> https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/Eliminaci%C3%B3n%20Gaussiana </font> </a>
+
+
+
+
+
+
+<h3 align = "center"> <font font face = "forte"> <a name="Método de Gauss-Jordan"> 2. Método de Gauss-Jordan </a> </h3>
+
+<h4> <font font face = "arial"> <a name="DescripciónGJ"> Descripción: </a> </h4>
+
+   - Este método es una variante de la eliminación de Gauss.
+   - Después de obtener la forma escalonada, se continúa hasta alcanzar la **forma escalonada reducida** (similar a la matriz identidad).
+   - La matriz resultante proporciona directamente las soluciones del sistema de ecuaciones.
+   - Útil para encontrar la **inversa de una matriz** y resolver sistemas de ecuaciones lineales.
+
+
+<h4> <font font face = "arial"> <a name="AlgoritmoGJ"> Algoritmo: </a> </h4>
+
+  1. Primero, se anota el sistema de ecuaciones en forma matricial, también llamada matriz aumentada.
+  2. Se transforma esta matriz en una matriz identidad. Para ello, se pueden realizar las siguientes operaciones en las filas de la matriz:
+      - Cambiar el orden de las filas.
+      - Multiplicar o dividir todos los términos de una fila por un número diferente de 0.
+      - Sustituir una fila por la suma de la misma fila más otra fila multiplicada por un número.
+  3. Una vez que se ha obtenido la matriz identidad, las soluciones del sistema de ecuaciones son los términos independientes de la matriz.
+
+Este método es eficiente para matrices 2x2 y 3x3. Al finalizar, no es necesario utilizar la sustitución hacia atrás para conseguir la solución.
+
+Es importante mencionar que si finalizamos las operaciones al hallar la forma escalonada reducida (forma lo más parecida a la matriz identidad), entonces el método se denomina eliminación de Gauss-Jordan.
+
+<h6> <font font face = "arial"> Ejemplo </h6>
+
+La matriz a resolver:
+
+![Captura de pantalla 2024-03-14 093329](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/9f6eef94-97ff-4b0c-93e3-b19e6c091bf7)
+
+
+<h6> <font font face = "arial"> Solución </h6>
+
+Como primer paso dividimos el primer renglón R1 entre la componente a11:
+
+![Captura de pantalla 2024-03-14 093436](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/de742227-e4f5-43ea-99ba-bab49121ad94)
+
+
+Como segundo paso se requiere «convertir» las componentes inferiores de la componente a11 en ceros (0):
+
+![Captura de pantalla 2024-03-14 093642](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/8f3df11f-28cf-4211-bc83-7be1501f6722)
+
+
+Al tercer renglón (R3) se le restará el primer renglón multiplicado por la componente a 31.
+
+![Captura de pantalla 2024-03-14 093757](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/c5d458c9-2d6d-4416-9401-689209979654)
+
+
+Se procede a dividir el segundo renglón R2 entre la componente a 22:
+
+![Captura de pantalla 2024-03-14 093846](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/4bb3b745-15df-49d2-a45d-e811d1c2e98b)
+
+
+Ahora se repite todo el proceso para las demás columnas hasta obtener la forma deseada.
+
+![Captura de pantalla 2024-03-14 094129](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/cc5affd2-a8e4-450f-91e8-df1252ecbf6c)
+
+
+Finalmente, convertimos al sistema convencional de ecuaciones:
+
+![Captura de pantalla 2024-03-14 094237](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/c37794dd-72a6-4fed-87d5-bb3ab4b09ef0)
+
+
+
+<h4> <font font face = "arial"> <a name="ImplementaciónEG"> Implementación: </a> </h4>
+
+<h5> <font font face = "arial"> Ejemplo a resolver. </h5>
+
+![Captura de pantalla 2024-03-14 094543](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/f7d0201a-943a-4e89-8526-8dd14ce454a9)
+
+
+<h5> <font font face = "arial"> <b> <i> Ejemplo en código. </i> </b> </h5>
+
+    package gaussjordan4;
+    
+    /**
+     *
+     * @author Rub_1
+     */
+    public class GaussJordan4 {
+    
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String[] args) {
+            // Definir las matrices directamente
+            double[][] matrix = {
+                {3, -2, 5, 38},
+                {2, 4, -1, -7},
+                {-7, -3, 4, 5}
+            };
+    
+            // Realizar el algoritmo de Gauss-Jordan
+            gaussJordan(matrix);
+            
+            // Imprimir la matriz en su forma escalonada reducida por filas
+            System.out.println("La matriz en su forma escalonada reducida por filas es:");
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    if (Math.abs(matrix[i][j] - (int)matrix[i][j]) < 1e-6) {
+                        System.out.print((int)matrix[i][j] + "\t");
+                    } else {
+                        System.out.print(matrix[i][j] + "\t");
+                    }
+                }
+                System.out.println();
+            }
+            
+            // Imprimir los valores de x, y, y z
+            System.out.println("Solución del sistema de ecuaciones:");
+            double x = matrix[0][matrix[0].length - 1];
+            double y = matrix[1][matrix[0].length - 1];
+            double z = matrix[2][matrix[0].length - 1];
+            System.out.println("x = " + x);
+            System.out.println("y = " + y);
+            System.out.println("z = " + z);
+        }
+        
+        public static void gaussJordan(double[][] matrix) {
+            int rows = matrix.length;
+            int cols = matrix[0].length;
+            
+            for (int k = 0; k < rows; k++) {
+                // Pivoteo parcial
+                int maxRow = k;
+                for (int i = k + 1; i < rows; i++) {
+                    if (Math.abs(matrix[i][k]) > Math.abs(matrix[maxRow][k])) {
+                        maxRow = i;
+                    }
+                }
+                double[] temp = matrix[k];
+                matrix[k] = matrix[maxRow];
+                matrix[maxRow] = temp;
+                
+                // Reducción
+                for (int i = 0; i < rows; i++) {
+                    if (i != k) {
+                        double factor = matrix[i][k] / matrix[k][k];
+                        for (int j = k; j < cols; j++) {
+                            matrix[i][j] -= factor * matrix[k][j];
+                        }
+                    }
+                }
+                
+                // Normalización
+                double divisor = matrix[k][k];
+                for (int j = k; j < cols; j++) {
+                    matrix[k][j] /= divisor;
+                }
+            }
+        }
+    }
+
+
+<h5> <font font face = "arial"> <b> <i> Ejecución del programa. </i> </b> </h5>
+
+![Captura de pantalla 2024-03-14 095352](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/bb217e66-ca29-432a-b56e-e63fc5af5931)
+
+
+Te invito a que puedas checar mis ejercicios para profundizar en la implementación: <a href="https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Jordan"> <font font face = "arial"> https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Jordan </font> </a>
+
