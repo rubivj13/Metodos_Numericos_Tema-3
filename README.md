@@ -700,7 +700,7 @@ Te invito a que puedas checar mis ejercicios para profundizar en la implementaci
 
 El problemario fue trabajado de forma colaborativa por:
 - Rubi veloz Jimenez
--Alan Orgaz Villegas
+- Alan Orgaz Villegas
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
