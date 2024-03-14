@@ -17,6 +17,11 @@
                       <li> <a href="#Métodos Numéricos sobre los métodos de solución de sistemas de ecuaciones lineales que se encuentran en nuestro repositorio."> Métodos Numéricos sobre los métodos de solución de sistemas de ecuaciones lineales que se encuentran en nuestro repositorio. </a> <br> </li>
                             <ul class="subindice"> 
                                 <li> <a href="#Eliminación Gaussiana"> Eliminación Gaussiana. </a> </li>
+                                    <ul class="subindice"> 
+                                        <li> <a href="#DescripciónEG"> Descripción. </a> </li>
+                                        <li> <a href="#AlgoritmoEG"> Algoritmo. </a> </li>
+                                        <li> <a href="#ImplementaciónEG"> Implementación. </a> </li>  
+                                    </ul>
                                 <li> <a href="#Método de Gauss-Jordan"> Método de Gauss-Jordan. </a> </li>
                                 <li> <a href="#Método de Gauss-Seidel"> Método de Gauss-Seidel. </a> </li> 
                                 <li> <a href="#Método de Jacobi"> Método de Jacobi. </a> </li> 
@@ -75,7 +80,7 @@ Cada uno de estos métodos se encuentra organizado en carpetas específicas. Al 
 
 <h3 align = "center"> <font font face = "forte"> <a name="Eliminación Gaussiana"> 1. Eliminación Gaussiana </a> </h3>
 
-<h4> <font font face = "arial"> Descripción: </h4>
+<h4> <font font face = "arial"> <a name="DescripciónEG"> Descripción: </a> </h4>
 
    - También conocido como **método de eliminación de Gauss**, este algoritmo se utiliza para resolver sistemas de ecuaciones lineales. Aquí están los pasos clave:
    - Se trabaja con la **matriz ampliada** del sistema (que incluye los coeficientes de las incógnitas y los términos independientes).
@@ -85,7 +90,7 @@ Cada uno de estos métodos se encuentra organizado en carpetas específicas. Al 
    - La clasificación del sistema (compatible determinado, indeterminado o incompatible) se deduce de la forma escalonada de la matriz ampliada.
 
 
-<h4> <font font face = "arial"> Algoritmo: </h4>
+<h4> <font font face = "arial"> <a name="AlgoritmoEG"> Algoritmo: </a> </h4>
 
   1. Ir a la primera columna número cero de izquierda a derecha.
   2. Si la primera fila tiene un cero en esta columna, intercambiarlo con otra que no lo tenga.
@@ -116,7 +121,7 @@ Concluimos que la solución del sistema de ecuaciones es:
 y=−1 
 z=1**
 
-<h4> <font font face = "arial"> Implementación: </h4>
+<h4> <font font face = "arial"> <a name="ImplementaciónEG"> Implementación: </a> </h4>
 
 <h5> <font font face = "arial"> Ejemplo a resolver. </h5>
 
