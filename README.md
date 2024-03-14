@@ -362,3 +362,193 @@ Finalmente, convertimos al sistema convencional de ecuaciones:
 
 Te invito a que puedas checar mis ejercicios para profundizar en la implementación: <a href="https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Jordan"> <font font face = "arial"> https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Jordan </font> </a>
 
+
+
+
+
+
+<h3 align = "center"> <font font face = "forte"> <a name="Método de Gauss-Seidel"> 3. Método de Gauss-Seidel </a> </h3>
+
+<h4> <font font face = "arial"> <a name="DescripciónGS"> Descripción: </a> </h4>
+
+   - Este método se utiliza para resolver sistemas de ecuaciones lineales **iterativamente**.
+   - Se basa en la descomposición de la matriz de coeficientes en una parte diagonal y una parte no diagonal.
+   - En cada iteración, se actualizan las incógnitas utilizando los valores anteriores.
+   - Adecuado para sistemas con **matrices simétricas y dominantes**.
+   - Converge más rápido si la matriz es **diagonalmente dominante**.
+
+
+<h4> <font font face = "arial"> <a name="AlgoritmoGS"> Algoritmo: </a> </h4>
+
+Este método es una versión acelerada de Jácobi. En el cual es necesario contar con un vector aproximado completo para proceder a la sustitución en las ecuaciones de recurrencia y obtener una nueva aproximación. En el método de Gauss-Seidel se propone ir sustituyendo los nuevos valores de la aproximación siguiente conforme se vayan obteniendo sin esperar a tener un vector completo. De esta forma se acelera la convergencia.
+
+Para resolverlo podemos seguir los siguientes pasos:
+
+  - Asignar valores iniciales a las incógnitas, pudiendo ser hipotéticos o arbitrarios.
+  - Empezar con la primera ecuación y calcular el valor de la incógnita con el coeficiente más grande, usando los valores asignados en el paso 1 para las otras incógnitas.
+  - Proceder a la siguiente ecuación y calcular el valor de la incógnita con el coeficiente más grande, usando el valor calculado en el paso anterior y los valores iniciales para las otras incógnitas.
+  - Repetir este proceso para las ecuaciones restantes, calculando siempre el valor de la incógnita con el coeficiente más grande en cada ecuación y usando los últimos valores calculados para las otras incógnitas.
+  - Continuar iterando hasta que los valores de las incógnitas no cambien significativamente entre iteraciones.
+
+<h6> <font font face = "arial"> Ejemplo </h6>
+
+La matriz a resolver:
+
+![Captura de pantalla 2024-03-14 102904](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/458c3e77-e9c7-43a2-b103-920edb9dfa8b)
+
+
+
+<h6> <font font face = "arial"> Solución </h6>
+
+Primero ordenamos las ecuaciones, de modo que en la diagonal principal esten los coeficientes mayores para asegurar la convergencia.
+
+![Captura de pantalla 2024-03-14 103005](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/47d0ee06-e7e9-41f7-8e40-663588402e0e)
+
+
+Despejamos cada una de las variables sobre la diagonal:
+
+![Captura de pantalla 2024-03-14 103105](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/1d7a7bde-cd70-4f54-ae39-b52064d89db0)
+
+
+Suponemos los valores iniciales X2 = 0 y X3 = 0 y calculamos X1
+
+![Captura de pantalla 2024-03-14 103155](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/0301c346-48c4-47a7-9546-6debf0b94594)
+
+
+Este valor junto con el de X3 se puede utilizar para obtener X2
+
+![Captura de pantalla 2024-03-14 103249](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/7ebda8e3-20e9-4d59-943b-1eac163cea6f)
+
+
+La primera iteración se completa sustituyendo los valores de X1 y X2 calculados obteniendo:
+
+![Captura de pantalla 2024-03-14 103338](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/5e10ab47-c106-44c8-9b12-5a948a115020)
+
+
+En la segunda iteración, se repite el mismo procedimiento:
+
+![Captura de pantalla 2024-03-14 103429](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/68f0a07d-ab3f-44e9-b6f7-a26105bc9bdb)
+
+
+Comparando los valores calculados entre la primera y la segunda iteración
+
+![Captura de pantalla 2024-03-14 103519](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/d096c967-b8f9-4043-b37e-df4acc59391d)
+
+
+Como podemos observar, no se cumple la condición.
+
+![Captura de pantalla 2024-03-14 103604](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/670dfe30-d5de-4b74-b991-29798753f8cb)
+
+
+Entonces tomamos los valores calculados en la última iteración y se toman como supuestos para la siguiente iteración. Se repite entonces el proceso:
+
+![Captura de pantalla 2024-03-14 103643](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/306613b6-4ccf-40f7-93ab-ade3c53b47d8)
+
+
+Comparando los valores obtenidos.
+
+![Captura de pantalla 2024-03-14 103737](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/b94845e5-4f2f-4e02-8d0e-714747abfdf0)
+
+
+Dado que se cumple la condición, el resultado es:
+
+**X1 = 3.0**
+
+**X2 = -2.5**
+
+**X3 = 7.0**
+
+
+
+<h4> <font font face = "arial"> <a name="ImplementaciónGS"> Implementación: </a> </h4>
+
+<h5> <font font face = "arial"> Ejemplo a resolver. </h5>
+
+![Captura de pantalla 2024-03-14 104237](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/4431315d-e5cb-45c2-9110-d6a1f1bdc921)
+
+
+
+<h5> <font font face = "arial"> <b> <i> Ejemplo en código. </i> </b> </h5>
+
+    package gaussseidel3;
+  
+    public class GaussSeidel3 {
+    
+        /**
+         * @param args the command line arguments
+         */
+        public static void main(String[] args) {
+            double[][] coeficientes = {
+                {3, -0.1, -0.2, 7.85},
+                {0.1, 7, -0.3, -19.3},
+                {0.3, -0.2, 10, 71.4}
+            };
+            
+            
+            double[] valoresIniciales = {0, 0, 0}; // Valores iniciales de las incógnitas
+            double tolerancia = 0.0001; // Tolerancia para el criterio de convergencia
+            int iteracionesMaximas = 1000; // Número máximo de iteraciones
+            
+            double[] solucion = gaussSeidel(coeficientes, valoresIniciales, tolerancia, iteracionesMaximas);
+            
+            if (solucion != null) {
+                System.out.println("Solución del sistema de ecuaciones:");
+                System.out.println("x = " + solucion[0]);
+                System.out.println("y = " + solucion[1]);
+                System.out.println("z = " + solucion[2]);
+            } else {
+                System.out.println("El método no converge.");
+            }
+        }
+        
+        public static double[] gaussSeidel(double[][] coeficientes, double[] valoresIniciales, double tolerancia, int iteracionesMaximas) {
+            int n = valoresIniciales.length;
+            double[] solucion = new double[n];
+            double[] solucionAnterior = new double[n];
+            int iteraciones = 0;
+            double error = tolerancia + 1;
+            
+            // Inicializar la solución con los valores iniciales
+            System.arraycopy(valoresIniciales, 0, solucion, 0, n);
+            
+            // Iterar hasta que se alcance la tolerancia o el número máximo de iteraciones
+            while (error > tolerancia && iteraciones < iteracionesMaximas) {
+                // Copiar la solución anterior
+                System.arraycopy(solucion, 0, solucionAnterior, 0, n);
+                
+                // Calcular la nueva solución
+                for (int i = 0; i < n; i++) {
+                    double suma = 0;
+                    for (int j = 0; j < n; j++) {
+                        if (j != i) {
+                            suma += coeficientes[i][j] * solucion[j];
+                        }
+                    }
+                    solucion[i] = (coeficientes[i][n] - suma) / coeficientes[i][i];
+                }
+                
+                // Calcular el error
+                error = 0;
+                for (int i = 0; i < n; i++) {
+                    error += Math.abs(solucion[i] - solucionAnterior[i]);
+                }
+                
+                iteraciones++;
+            }
+            
+            // Verificar la convergencia
+            if (error <= tolerancia) {
+                return solucion;
+            } else {
+                return null; // No converge
+            }
+        }
+    }
+
+
+<h5> <font font face = "arial"> <b> <i> Ejecución del programa. </i> </b> </h5>
+
+![Captura de pantalla 2024-03-14 104317](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/5682ca4d-29fb-4030-b16d-c892851e14ea)
+
+
+Te invito a que puedas checar mis ejercicios para profundizar en la implementación: <a href="https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Seidel"> <font font face = "arial"> https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Seidel </font> </a>
