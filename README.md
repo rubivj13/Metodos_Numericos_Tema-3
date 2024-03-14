@@ -531,7 +531,8 @@ Dado que se cumple la condición, el resultado es:
 
 <h5> <font font face = "arial"> <b> <i> Ejecución del programa. </i> </b> </h5>
 
-![Captura de pantalla 2024-03-14 104317](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/5682ca4d-29fb-4030-b16d-c892851e14ea)
+![Captura de pantalla 2024-03-14 142312](https://github.com/rubivj13/Metodos_Numericos_Tema-3/assets/147438464/9c7c3b9d-5947-4c85-9aa9-9164e5b76c88)
+
 
 
 Te invito a que puedas checar mis ejercicios para profundizar en la implementación: <a href="https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Seidel"> <font font face = "arial"> https://github.com/rubivj13/Metodos_Numericos_Tema-3/tree/main/M%C3%A9todo%20de%20Gauss-Seidel </font> </a>
