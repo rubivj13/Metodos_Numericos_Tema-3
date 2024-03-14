@@ -15,68 +15,50 @@ public class GaussSeidel3 {
      */
     public static void main(String[] args) {
         double[][] coeficientes = {
-            {3, -0.1, -0.2, 7.85},
-            {0.1, 7, -0.3, -19.3},
-            {0.3, -0.2, 10, 71.4}
+            {3, -0.1, -0.2},
+            {0.1, 7, -0.3},
+            {0.3, -0.2, 10}
         };
-        
-        
-        double[] valoresIniciales = {0, 0, 0}; // Valores iniciales de las incógnitas
-        double tolerancia = 0.0001; // Tolerancia para el criterio de convergencia
-        int iteracionesMaximas = 1000; // Número máximo de iteraciones
-        
-        double[] solucion = gaussSeidel(coeficientes, valoresIniciales, tolerancia, iteracionesMaximas);
-        
-        if (solucion != null) {
-            System.out.println("Solución del sistema de ecuaciones:");
-            System.out.println("x = " + solucion[0]);
-            System.out.println("y = " + solucion[1]);
-            System.out.println("z = " + solucion[2]);
-        } else {
-            System.out.println("El método no converge.");
+        double[] terminosIndependientes = {7.85, -19.3, 71.4};
+        double[] solucion = resolverSistema(coeficientes, terminosIndependientes);
+        for (int i = 0; i < solucion.length; i++) {
+            System.out.println("x[" + (i+1) + "] = " + solucion[i]);
         }
+
     }
-    
-    public static double[] gaussSeidel(double[][] coeficientes, double[] valoresIniciales, double tolerancia, int iteracionesMaximas) {
-        int n = valoresIniciales.length;
-        double[] solucion = new double[n];
-        double[] solucionAnterior = new double[n];
-        int iteraciones = 0;
-        double error = tolerancia + 1;
-        
-        // Inicializar la solución con los valores iniciales
-        System.arraycopy(valoresIniciales, 0, solucion, 0, n);
-        
-        // Iterar hasta que se alcance la tolerancia o el número máximo de iteraciones
-        while (error > tolerancia && iteraciones < iteracionesMaximas) {
-            // Copiar la solución anterior
-            System.arraycopy(solucion, 0, solucionAnterior, 0, n);
-            
-            // Calcular la nueva solución
+
+    public static double[] resolverSistema(double[][] coeficientes, double[] terminosIndependientes) {
+        int n = coeficientes.length;
+        double[] x = new double[n];
+        double[] nuevoX = new double[n];
+        int iteracionesMaximas = 100;
+        double epsilon = 1e-6;
+
+        for (int iter = 0; iter < iteracionesMaximas; iter++) {
             for (int i = 0; i < n; i++) {
-                double suma = 0;
+                nuevoX[i] = terminosIndependientes[i];
                 for (int j = 0; j < n; j++) {
                     if (j != i) {
-                        suma += coeficientes[i][j] * solucion[j];
+                        nuevoX[i] -= coeficientes[i][j] * x[j];
                     }
                 }
-                solucion[i] = (coeficientes[i][n] - suma) / coeficientes[i][i];
+                nuevoX[i] /= coeficientes[i][i];
             }
-            
-            // Calcular el error
-            error = 0;
+
+            boolean detener = true;
             for (int i = 0; i < n; i++) {
-                error += Math.abs(solucion[i] - solucionAnterior[i]);
+                if (Math.abs(nuevoX[i] - x[i]) > epsilon) {
+                    detener = false;
+                    break;
+                }
             }
-            
-            iteraciones++;
+
+            if (detener) {
+                break;
+            }
+
+            System.arraycopy(nuevoX, 0, x, 0, n);
         }
-        
-        // Verificar la convergencia
-        if (error <= tolerancia) {
-            return solucion;
-        } else {
-            return null; // No converge
-        }
+        return x;
     }
 }
