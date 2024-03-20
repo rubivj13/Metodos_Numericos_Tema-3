@@ -3,7 +3,7 @@
 
 ¡Hola a todos! Soy Rubí Veloz Jiménez, estudiante de Ingeniería en Sistemas Computacionales. En esta ocasión, les presento un problemario relacionado con la materia de Métodos Numéricos sobre los métodos de solución de sistemas de ecuaciones lineales( Eliminación Gaussiana, Método de Gauss-Jordan, Método de Gauss-Seidel y Método de Jacobi).
 
-<h2 align = "center"> <font color = "darkorange" size = "+6"  font face = "bauhaus 93">  INDICE </font> </h2>
+<h2 align = "center"> <font color = "darkorange" size = "+6"  font face = "bauhaus 93">  ÍNDICE </font> </h2>
 <header> <font color = "red" size="+1" font face = "aharoni">
                 <nav class="navegacion">
                     <ul class="Indice">
